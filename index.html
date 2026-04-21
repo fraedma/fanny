@@ -1,0 +1,2159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Centro Educativo Integral Ofrenda de Vida</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --wine: #7B1D2A;
+      --wine-light: #9E3344;
+      --wine-soft: #f7eaec;
+      --gold: #C9A84C;
+      --gold-light: #E8C96A;
+      --cream: #FAF7F2;
+      --beige: #EDE8DF;
+      --text-dark: #2C2C2C;
+      --text-mid: #5A5A5A;
+      --white: #FFFFFF;
+      --shadow: 0 4px 24px rgba(123,29,42,0.08);
+      --shadow-lg: 0 8px 40px rgba(123,29,42,0.13);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* ─── NAVBAR ─── */
+    .navbar {
+      background: var(--white) !important;
+      box-shadow: 0 2px 16px rgba(123,29,42,0.10);
+      padding: 0.7rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: box-shadow 0.3s;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-logo {
+      width: 54px;
+      height: 54px;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--wine);
+      letter-spacing: 0.01em;
+    }
+
+    .brand-sub {
+      font-size: 0.65rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .navbar-nav .nav-link {
+      color: var(--text-mid) !important;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.85rem !important;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0.85rem;
+      right: 0.85rem;
+      bottom: 0;
+      height: 2px;
+      background: var(--wine);
+      transform: scaleX(0);
+      transition: transform 0.25s;
+    }
+
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: var(--wine) !important;
+    }
+
+    .navbar-nav .nav-link:hover::after,
+    .navbar-nav .nav-link.active::after {
+      transform: scaleX(1);
+    }
+
+    .navbar-toggler {
+      border: none;
+      outline: none;
+      box-shadow: none !important;
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%237B1D2A' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* ─── HERO ─── */
+    #inicio {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, #f7eaec 0%, #faf7f2 60%, #ede8df 100%);
+      overflow: hidden;
+    }
+
+    .hero-bg-pattern {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 80% 20%, rgba(201,168,76,0.13) 0%, transparent 50%),
+        radial-gradient(circle at 10% 80%, rgba(123,29,42,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-geo {
+      position: absolute;
+      right: -60px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      border: 2px solid rgba(201,168,76,0.18);
+      pointer-events: none;
+    }
+
+    .hero-geo::before {
+      content: '';
+      position: absolute;
+      inset: 30px;
+      border-radius: 50%;
+      border: 1px solid rgba(123,29,42,0.10);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--wine-soft);
+      color: var(--wine);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(123,29,42,0.15);
+      margin-bottom: 1.2rem;
+      animation: fadeInDown 0.8s ease forwards;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 700;
+      color: var(--wine);
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+      animation: fadeInDown 0.9s ease forwards;
+    }
+
+    .hero-title span {
+      color: var(--gold);
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-mid);
+      font-weight: 300;
+      max-width: 480px;
+      margin-bottom: 1.8rem;
+      line-height: 1.7;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .hero-lema {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--wine);
+      font-style: italic;
+      margin-bottom: 2rem;
+      opacity: 0.85;
+      animation: fadeInUp 1.1s ease forwards;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      animation: fadeInUp 1.2s ease forwards;
+    }
+
+    .btn-wine {
+      background: var(--wine);
+      color: var(--white);
+      border: none;
+      padding: 13px 30px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 18px rgba(123,29,42,0.22);
+    }
+
+    .btn-wine:hover {
+      background: var(--wine-light);
+      color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(123,29,42,0.30);
+    }
+
+    .btn-outline-wine {
+      background: transparent;
+      color: var(--wine);
+      border: 2px solid var(--wine);
+      padding: 11px 28px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-outline-wine:hover {
+      background: var(--wine);
+      color: var(--white);
+    }
+
+    /* Escudo SVG en el hero */
+    .hero-shield-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    .shield-svg-container {
+      position: relative;
+      width: 320px;
+      height: 320px;
+    }
+
+    .shield-ring {
+      position: absolute;
+      inset: -20px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.25);
+      animation: rotateSlow 30s linear infinite;
+    }
+
+    .shield-ring2 {
+      position: absolute;
+      inset: -40px;
+      border-radius: 50%;
+      border: 1px dashed rgba(123,29,42,0.12);
+      animation: rotateSlow 50s linear infinite reverse;
+    }
+
+    @keyframes rotateSlow {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ─── SECTION STYLES ─── */
+    section {
+      padding: 80px 0;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      color: var(--wine);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .section-line {
+      width: 48px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--wine), var(--gold));
+      margin-bottom: 1.5rem;
+    }
+
+    .section-line.center { margin-left: auto; margin-right: auto; }
+
+    /* ─── NOSOTROS / MISIÓN VISIÓN ─── */
+    #nosotros {
+      background: var(--white);
+    }
+
+    .mv-card {
+      background: var(--cream);
+      border: 1px solid var(--beige);
+      border-radius: 8px;
+      padding: 2rem 1.8rem;
+      height: 100%;
+      transition: box-shadow 0.25s, transform 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mv-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--wine), var(--gold));
+      border-radius: 4px 0 0 4px;
+    }
+
+    .mv-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-4px);
+    }
+
+    .mv-icon {
+      width: 46px;
+      height: 46px;
+      background: var(--wine-soft);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .mv-icon i {
+      color: var(--wine);
+      font-size: 1.1rem;
+    }
+
+    .mv-card h4 {
+      font-size: 1.1rem;
+      color: var(--wine);
+      margin-bottom: 0.7rem;
+    }
+
+    .mv-card p {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    /* Versículo hero */
+    .verse-band {
+      background: var(--wine);
+      color: var(--white);
+      padding: 2.5rem 0;
+      text-align: center;
+    }
+
+    .verse-band blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      font-weight: 400;
+      max-width: 720px;
+      margin: 0 auto 0.5rem;
+      line-height: 1.5;
+      opacity: 0.95;
+    }
+
+    .verse-band cite {
+      font-size: 0.82rem;
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ─── FUNDAMENTOS ─── */
+    #fundamentos {
+      background: var(--cream);
+    }
+
+    .fund-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .fund-item {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 1.6rem 1.4rem;
+      border: 1px solid var(--beige);
+      transition: box-shadow 0.25s, transform 0.25s;
+      text-align: center;
+    }
+
+    .fund-item:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-3px);
+    }
+
+    .fund-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: rgba(123,29,42,0.12);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .fund-item h5 {
+      font-size: 0.95rem;
+      color: var(--wine);
+      margin-bottom: 0.5rem;
+    }
+
+    .fund-item p {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    /* ─── NIVELES ─── */
+    #oferta {
+      background: var(--white);
+    }
+
+    .nivel-card {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.25s, transform 0.25s;
+      background: var(--white);
+      border: 1px solid var(--beige);
+    }
+
+    .nivel-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-5px);
+    }
+
+    .nivel-header {
+      background: var(--wine);
+      padding: 1.8rem 1.5rem 1.2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .nivel-header.gold-header {
+      background: linear-gradient(135deg, var(--wine) 60%, var(--gold) 100%);
+    }
+
+    .nivel-icon {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .nivel-header h4 {
+      color: var(--white);
+      font-size: 1.05rem;
+      margin: 0;
+    }
+
+    .nivel-body {
+      padding: 1.5rem;
+    }
+
+    .nivel-body ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nivel-body ul li {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      padding: 0.4rem 0;
+      border-bottom: 1px solid var(--beige);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nivel-body ul li:last-child { border-bottom: none; }
+
+    .nivel-body ul li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .badge-wine {
+      background: var(--wine-soft);
+      color: var(--wine);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── PLAN DE ESTUDIOS ─── */
+    #plan {
+      background: var(--beige);
+    }
+
+    .plan-table {
+      background: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .plan-table thead {
+      background: var(--wine);
+      color: var(--white);
+    }
+
+    .plan-table thead th {
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 12px 10px;
+      font-weight: 700;
+      font-family: 'Lato', sans-serif;
+    }
+
+    .plan-table tbody td {
+      font-size: 0.83rem;
+      padding: 10px;
+      border-bottom: 1px solid var(--beige);
+      color: var(--text-mid);
+    }
+
+    .plan-table tbody tr:last-child td { border-bottom: none; }
+
+    .plan-table tbody tr:hover td { background: var(--wine-soft); }
+
+    .plan-table .asig-name {
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .plan-table .hours-cell {
+      text-align: center;
+      font-weight: 700;
+      color: var(--wine);
+    }
+
+    .plan-table .total-row td {
+      background: var(--wine-soft);
+      font-weight: 700;
+      color: var(--wine);
+    }
+
+    /* ─── PERFIL DEL ESTUDIANTE ─── */
+    #perfil {
+      background: var(--white);
+    }
+
+    .perfil-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.8rem;
+    }
+
+    .perfil-list li {
+      background: var(--cream);
+      border: 1px solid var(--beige);
+      border-radius: 6px;
+      padding: 0.85rem 1rem 0.85rem 2.8rem;
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      line-height: 1.5;
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .perfil-list li::before {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--wine);
+      font-size: 0.78rem;
+    }
+
+    .perfil-list li:hover {
+      border-color: var(--wine);
+      box-shadow: 0 2px 10px rgba(123,29,42,0.08);
+    }
+
+    /* ─── GOBIERNO ESCOLAR ─── */
+    #gobierno {
+      background: var(--cream);
+    }
+
+    .gov-card {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 1.4rem 1.2rem;
+      text-align: center;
+      border: 1px solid var(--beige);
+      transition: box-shadow 0.25s, transform 0.2s;
+      height: 100%;
+    }
+
+    .gov-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-3px);
+    }
+
+    .gov-card .gov-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--wine-soft);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+
+    .gov-card .gov-icon i { color: var(--wine); font-size: 1.2rem; }
+
+    .gov-card h5 {
+      font-size: 0.9rem;
+      color: var(--wine);
+      margin-bottom: 0.5rem;
+    }
+
+    .gov-card p {
+      font-size: 0.78rem;
+      color: var(--text-mid);
+      line-height: 1.55;
+    }
+
+    /* ─── MATRICULA ─── */
+    #matricula {
+      background: var(--wine);
+      color: var(--white);
+    }
+
+    #matricula .section-title { color: var(--gold-light); }
+    #matricula .section-label { color: var(--gold); }
+    #matricula .section-line { background: linear-gradient(90deg, var(--gold), var(--white)); }
+
+    .req-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .req-list li {
+      padding: 0.65rem 0 0.65rem 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.85);
+      position: relative;
+    }
+
+    .req-list li::before {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+    }
+
+    .req-list li:last-child { border-bottom: none; }
+
+    .info-box {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 8px;
+      padding: 1.5rem 1.4rem;
+    }
+
+    .info-box h5 {
+      color: var(--gold-light);
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 0.9rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .info-item i { color: var(--gold); font-size: 0.9rem; margin-top: 2px; flex-shrink: 0; }
+
+    /* ─── VALORES / PRINCIPIOS ─── */
+    #valores {
+      background: var(--white);
+    }
+
+    .valor-item {
+      display: flex;
+      gap: 1.2rem;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--beige);
+      align-items: flex-start;
+    }
+
+    .valor-item:last-child { border-bottom: none; }
+
+    .valor-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--wine-soft);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 40px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .valor-content h5 {
+      font-size: 0.95rem;
+      color: var(--wine);
+      margin-bottom: 0.3rem;
+    }
+
+    .valor-content p {
+      font-size: 0.83rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ─── CONTACTO ─── */
+    #contacto {
+      background: var(--beige);
+    }
+
+    .contact-card {
+      background: var(--white);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .contact-info-panel {
+      background: var(--wine);
+      padding: 2.5rem 2rem;
+      color: var(--white);
+      height: 100%;
+    }
+
+    .contact-info-panel h3 {
+      color: var(--gold-light);
+      margin-bottom: 1.5rem;
+      font-size: 1.4rem;
+    }
+
+    .contact-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 1.2rem;
+      align-items: flex-start;
+    }
+
+    .contact-row i {
+      color: var(--gold);
+      font-size: 1rem;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .contact-row div {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.88);
+    }
+
+    .contact-row strong {
+      display: block;
+      color: var(--white);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 2px;
+    }
+
+    .contact-form-panel {
+      padding: 2.5rem 2rem;
+    }
+
+    .form-control, .form-select {
+      border: 1px solid var(--beige);
+      border-radius: 4px;
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      background: var(--cream);
+      color: var(--text-dark);
+      transition: border-color 0.2s;
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: var(--wine);
+      box-shadow: 0 0 0 3px rgba(123,29,42,0.10);
+      background: var(--white);
+      outline: none;
+    }
+
+    .form-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-mid);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #1a0508;
+      color: rgba(255,255,255,0.65);
+      padding: 3rem 0 1.5rem;
+    }
+
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold-light);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-logo-desc {
+      font-size: 0.8rem;
+      line-height: 1.6;
+      max-width: 280px;
+    }
+
+    .footer-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-divider {
+      border-color: rgba(255,255,255,0.10);
+      margin: 2rem 0 1rem;
+    }
+
+    .footer-bottom {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 10px;
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      width: 34px;
+      height: 34px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .social-links a:hover {
+      background: var(--wine);
+      color: var(--white);
+    }
+
+    /* ─── ANIMACIONES ─── */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── STATS BAR ─── */
+    .stats-bar {
+      background: var(--wine);
+      padding: 2rem 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 0.5rem 0;
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
+
+    .stat-divider {
+      width: 1px;
+      background: rgba(255,255,255,0.15);
+      height: 50px;
+      margin: auto;
+    }
+
+    /* ─── SCROLL TO TOP ─── */
+    #scrollTop {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: var(--wine);
+      color: var(--white);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(123,29,42,0.30);
+      transition: opacity 0.3s, transform 0.2s;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 999;
+      border: none;
+      text-decoration: none;
+    }
+
+    #scrollTop.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    #scrollTop:hover {
+      background: var(--wine-light);
+      transform: translateY(-2px);
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      #inicio { min-height: auto; padding: 80px 0 60px; }
+      .hero-shield-wrap { margin-top: 3rem; }
+      .shield-svg-container { width: 220px; height: 220px; }
+      section { padding: 60px 0; }
+      .stat-divider { display: none; }
+      .contact-info-panel { padding: 2rem 1.5rem; }
+    }
+
+    @media (max-width: 576px) {
+      .brand-text .brand-name { font-size: 0.8rem; }
+    }
+  </style>
+  <script>
+  window.addEventListener('mouseover', initLandbot, { once: true });
+  window.addEventListener('touchstart', initLandbot, { once: true });
+  var myLandbot;
+  function initLandbot() {
+    if (!myLandbot) {
+      var s = document.createElement('script');
+      s.type = "module"
+      s.async = true;
+      s.addEventListener('load', function() {
+        var myLandbot = new Landbot.Livechat({
+          configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-3397876-GXI8DA4BP4DAAQ5R/index.json',
+        });
+      });
+      s.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+  }
+</script>
+</head>
+<body>
+
+<!-- ════════════════════════════════
+     NAVBAR
+════════════════════════════════ -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#inicio">
+      <!-- Logo SVG minimalista basado en el escudo -->
+      <svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="46" fill="#FAF0F2" stroke="#7B1D2A" stroke-width="2.5"/>
+        <circle cx="50" cy="50" r="38" fill="none" stroke="#C9A84C" stroke-width="1.2"/>
+        <!-- corazón simplificado -->
+        <path d="M50 68 C40 58 28 52 28 41 C28 33 34 28 41 30 C44 31 47 33 50 37 C53 33 56 31 59 30 C66 28 72 33 72 41 C72 52 60 58 50 68Z"
+              fill="#7B1D2A" opacity="0.9"/>
+        <!-- cruz -->
+        <rect x="47.5" y="34" width="5" height="18" fill="white" rx="1"/>
+        <rect x="43" y="40" width="14" height="5" fill="white" rx="1"/>
+      </svg>
+      <div class="brand-text">
+        <span class="brand-name">C.E.I. Ofrenda de Vida</span>
+        <span class="brand-sub">Excelencia · Integridad · Altruismo</span>
+      </div>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto gap-1">
+        <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="#nosotros">Nosotros</a></li>
+        <li class="nav-item"><a class="nav-link" href="#fundamentos">Fundamentos</a></li>
+        <li class="nav-item"><a class="nav-link" href="#oferta">Oferta Educativa</a></li>
+        <li class="nav-item"><a class="nav-link" href="#plan">Plan de Estudios</a></li>
+        <li class="nav-item"><a class="nav-link" href="#gobierno">Gobierno Escolar</a></li>
+        <li class="nav-item"><a class="nav-link" href="#matricula">Matrícula</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════
+     HERO
+════════════════════════════════ -->
+<section id="inicio">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-geo"></div>
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 hero-content">
+        <div class="hero-badge">
+          <i class="fa-solid fa-star me-1" style="font-size:0.65rem;"></i>
+          Licencia #3452 de 2022 · DANE 313657006490
+        </div>
+        <h1 class="hero-title">
+          Centro Educativo<br/>
+          Integral<br/>
+          <span>Ofrenda de Vida</span>
+        </h1>
+        <p class="hero-subtitle">
+          Formamos estudiantes con alta calidad educativa, moral y espiritual en los niveles Preescolar, Básica Primaria y Básica Secundaria con énfasis en <strong>Inglés</strong> y <strong>Formación Cristiana</strong>.
+        </p>
+        <p class="hero-lema">
+          "Excelencia, Integridad y Altruismo"
+        </p>
+        <div class="hero-cta">
+          <a href="#matricula" class="btn-wine">Proceso de Matrícula</a>
+          <a href="#nosotros" class="btn-outline-wine">Conocer más</a>
+        </div>
+      </div>
+      <div class="col-lg-6 hero-shield-wrap">
+        <div class="shield-svg-container">
+          <div class="shield-ring"></div>
+          <div class="shield-ring2"></div>
+          <!-- Escudo institucional minimalista SVG -->
+          <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:relative;z-index:1;">
+            <!-- Fondo dorado suave -->
+            <circle cx="150" cy="150" r="140" fill="#FFF8EC" stroke="#C9A84C" stroke-width="3"/>
+            <circle cx="150" cy="150" r="125" fill="none" stroke="#7B1D2A" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+            <!-- Texto curvo superior (decorativo) -->
+            <defs>
+              <path id="arcTop" d="M 30 150 A 120 120 0 0 1 270 150"/>
+              <path id="arcBot" d="M 35 165 A 115 115 0 0 0 265 165"/>
+            </defs>
+            <text font-family="'Lato',sans-serif" font-size="12" font-weight="700" fill="#7B1D2A" letter-spacing="2">
+              <textPath href="#arcTop" startOffset="10%">CENTRO EDUCATIVO INTEGRAL</textPath>
+            </text>
+            <text font-family="'Lato',sans-serif" font-size="12" font-weight="700" fill="#C9A84C" letter-spacing="2">
+              <textPath href="#arcBot" startOffset="15%">OFRENDA DE VIDA</textPath>
+            </text>
+
+            <!-- Escudo interior -->
+            <rect x="90" y="80" width="120" height="130" rx="10" fill="#7B1D2A" opacity="0.08"/>
+
+            <!-- Corazón grande -->
+            <path d="M150 210 C125 188 95 172 95 148 C95 132 106 122 118 125 C125 127 133 132 150 145 C167 132 175 127 182 125 C194 122 205 132 205 148 C205 172 175 188 150 210Z"
+                  fill="#7B1D2A"/>
+
+            <!-- Cruz en el corazón -->
+            <rect x="145.5" y="133" width="9" height="32" fill="white" rx="2"/>
+            <rect x="137" y="143" width="26" height="9" fill="white" rx="2"/>
+
+            <!-- Estrellas decorativas -->
+            <text x="75" y="158" font-size="14" fill="#C9A84C" text-anchor="middle">✦</text>
+            <text x="225" y="158" font-size="14" fill="#C9A84C" text-anchor="middle">✦</text>
+
+            <!-- Etiquetas de valores -->
+            <text x="150" y="240" font-family="'Lato',sans-serif" font-size="9" font-weight="700" fill="#7B1D2A" text-anchor="middle" letter-spacing="1.5">INTEGRIDAD · ALTRUISMO · EXCELENCIA</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="row text-center g-0">
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <div class="stat-num">+15</div>
+          <div class="stat-label">Años de Formación</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <div class="stat-num">6</div>
+          <div class="stat-label">Grados Escolares</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <div class="stat-num">6</div>
+          <div class="stat-label">Docentes Dedicados</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-item">
+          <div class="stat-num">10</div>
+          <div class="stat-label">Áreas del Conocimiento</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     NOSOTROS – MISIÓN & VISIÓN
+════════════════════════════════ -->
+<section id="nosotros">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5 reveal">
+        <div class="section-label">Quiénes Somos</div>
+        <h2 class="section-title">Horizonte Institucional</h2>
+        <div class="section-line"></div>
+        <p style="font-size:0.9rem;color:var(--text-mid);line-height:1.8;margin-bottom:1.2rem;">
+          El <strong>Centro Educativo Integral Ofrenda de Vida</strong> es una institución privada ubicada en el municipio de <strong>San Juan Nepomuceno, Bolívar</strong>, orientada por principios cristianos, con población estudiantil de carácter mixto.
+        </p>
+        <p style="font-size:0.9rem;color:var(--text-mid);line-height:1.8;margin-bottom:1.5rem;">
+          Ofrecemos una jornada única de modalidad académica con profundización en <strong>lengua inglesa</strong>, inscrita en calendario A, perteneciente al núcleo educativo N°9. Nuestra filosofía se basa en la Palabra de Dios, formando a los educandos en valores Cristocéntricos bajo el lema <em>"Excelencia, Integridad y Altruismo"</em>.
+        </p>
+        <div class="d-flex gap-2 flex-wrap">
+          <span class="badge-wine">NIT: 900273083</span>
+          <span class="badge-wine">DANE: 313657006490</span>
+          <span class="badge-wine">Núcleo N°9</span>
+        </div>
+      </div>
+      <div class="col-lg-7 reveal">
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <div class="mv-card">
+              <div class="mv-icon"><i class="fa-solid fa-eye"></i></div>
+              <h4>Visión</h4>
+              <p>Institución con carácter altruista que orienta procesos de fortalecimiento de valores espirituales, morales y éticos; con búsqueda de excelencia académica, partiendo de la integralidad del educando con un eje investigativo que contribuye al desarrollo humano.</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="mv-card">
+              <div class="mv-icon"><i class="fa-solid fa-bullseye"></i></div>
+              <h4>Misión</h4>
+              <p>Formar estudiantes con alta calidad educativa, moral y espiritual que desarrollen plenamente su ser integral; contribuyendo a que sean activos en el servicio a la comunidad y ciudadanos que aporten al mejoramiento de la sociedad.</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="mv-card">
+              <div class="mv-icon"><i class="fa-solid fa-book-open"></i></div>
+              <h4>Filosofía</h4>
+              <p>Basada en la Biblia como fuente de sabiduría y guía de vida. Formamos personas íntegras capaces de transformar su entorno aplicando principios de Fe, Virtud y Conocimiento, respondiendo favorablemente a la sociedad.</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="mv-card">
+              <div class="mv-icon"><i class="fa-solid fa-map-marker-alt"></i></div>
+              <h4>Ubicación</h4>
+              <p>Calle 10 N° 10-30, Barrio Centro, San Juan Nepomuceno, Bolívar — en los Montes de María, región Caribe colombiana. Rodeados del Parque Natural Los Colorados y el paisaje sanjuanero.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VERSÍCULO -->
+<div class="verse-band">
+  <div class="container">
+    <blockquote>
+      "Instruye al niño en su camino, y aun cuando fuere viejo no se apartará de él."
+    </blockquote>
+    <cite>Proverbios 22:6</cite>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     FUNDAMENTOS
+════════════════════════════════ -->
+<section id="fundamentos">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-label">Pilares Institucionales</div>
+      <h2 class="section-title">Nuestros Fundamentos</h2>
+      <div class="section-line center"></div>
+      <p style="max-width:560px;margin:0 auto;font-size:0.88rem;color:var(--text-mid);line-height:1.7;">
+        El Centro Educativo se basa en la convicción de trabajar en torno a principios que generan la dinámica del desarrollo integral del educando.
+      </p>
+    </div>
+    <div class="fund-grid reveal">
+      <div class="fund-item">
+        <div class="fund-num">01</div>
+        <h5>Amor a Dios</h5>
+        <p>El amor al Creador como eje para garantizar el éxito en la convivencia. Nos forma en misericordia, servicio, fidelidad, benignidad y tolerancia. <em>(Lucas 10:27)</em></p>
+      </div>
+      <div class="fund-item">
+        <div class="fund-num">02</div>
+        <h5>Altruismo</h5>
+        <p>Amor al prójimo. Establecer relaciones fraternas, de comunidad y unidad entre todos los miembros de la comunidad educativa.</p>
+      </div>
+      <div class="fund-item">
+        <div class="fund-num">03</div>
+        <h5>Sabiduría</h5>
+        <p>El principio de la sabiduría es el temor a Jehová <em>(Proverbios 1:7)</em>. Capacidad de juzgar y pensar con prudencia, justicia y espíritu crítico.</p>
+      </div>
+      <div class="fund-item">
+        <div class="fund-num">04</div>
+        <h5>Conocimiento</h5>
+        <p>Guiar a los estudiantes en los saberes de la cultura nacional y de la humanidad, en referencia constante a los parámetros de verdad bíblica.</p>
+      </div>
+      <div class="fund-item">
+        <div class="fund-num">05</div>
+        <h5>Fe</h5>
+        <p>Llevar a los educandos, familias y comunidad a la comprensión del mensaje transformador de Jesucristo como fundamento de vida.</p>
+      </div>
+      <div class="fund-item">
+        <div class="fund-num">06</div>
+        <h5>Virtud</h5>
+        <p>Formación del carácter y personalidad madura conforme a los valores que surgen de la Palabra de Dios en cada estudiante.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     OFERTA EDUCATIVA
+════════════════════════════════ -->
+<section id="oferta">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-label">Lo que ofrecemos</div>
+      <h2 class="section-title">Niveles Educativos</h2>
+      <div class="section-line center"></div>
+      <p style="max-width:540px;margin:0 auto;font-size:0.88rem;color:var(--text-mid);line-height:1.7;">
+        Brindamos educación integral en tres niveles con énfasis en inglés y formación cristiana, en jornada única, calendario A.
+      </p>
+    </div>
+    <div class="row g-4 justify-content-center reveal">
+      <div class="col-md-4">
+        <div class="nivel-card">
+          <div class="nivel-header">
+            <span class="nivel-icon">🌱</span>
+            <h4>Preescolar</h4>
+          </div>
+          <div class="nivel-body">
+            <ul>
+              <li>Grado Transición</li>
+              <li>Desarrollo integral temprano</li>
+              <li>Dimensión cognitiva y comunicativa</li>
+              <li>Dimensión corporal y estética</li>
+              <li>Ética y valores desde la infancia</li>
+              <li>Iniciación al inglés</li>
+              <li>Formación cristiana base</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="nivel-card">
+          <div class="nivel-header gold-header">
+            <span class="nivel-icon">📚</span>
+            <h4>Básica Primaria</h4>
+          </div>
+          <div class="nivel-body">
+            <ul>
+              <li>Grados 1° a 5°</li>
+              <li>Matemáticas (7 horas/semana)</li>
+              <li>Lengua Castellana (8 horas/semana)</li>
+              <li>Inglés (2 horas/semana)</li>
+              <li>Ciencias Naturales y Sociales</li>
+              <li>Educación Física y Artística</li>
+              <li>Formación Cristiana y Ética</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="nivel-card">
+          <div class="nivel-header">
+            <span class="nivel-icon">🎓</span>
+            <h4>Básica Secundaria</h4>
+          </div>
+          <div class="nivel-body">
+            <ul>
+              <li>Continuación de la formación integral</li>
+              <li>Profundización en inglés</li>
+              <li>Formación cristiana avanzada</li>
+              <li>Competencias ciudadanas</li>
+              <li>Proyectos pedagógicos</li>
+              <li>Gobierno estudiantil activo</li>
+              <li>Preparación para la vida</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Énfasis especiales -->
+    <div class="row g-3 mt-4 reveal">
+      <div class="col-md-6">
+        <div style="background:var(--wine-soft);border-radius:8px;padding:1.5rem;border:1px solid rgba(123,29,42,0.12);">
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="font-size:2rem;">🌍</div>
+            <div>
+              <h5 style="color:var(--wine);margin-bottom:0.4rem;font-size:1rem;">Énfasis en Inglés</h5>
+              <p style="font-size:0.83rem;color:var(--text-mid);line-height:1.6;margin:0;">
+                Profundización en lengua inglesa integrada en todos los niveles, desarrollando competencias comunicativas para el mundo globalizado desde los primeros años.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div style="background:var(--wine-soft);border-radius:8px;padding:1.5rem;border:1px solid rgba(123,29,42,0.12);">
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="font-size:2rem;">✝️</div>
+            <div>
+              <h5 style="color:var(--wine);margin-bottom:0.4rem;font-size:1rem;">Formación Cristiana</h5>
+              <p style="font-size:0.83rem;color:var(--text-mid);line-height:1.6;margin:0;">
+                Educación fundamentada en la Palabra de Dios como guía de vida. Formamos valores éticos, morales y espirituales que transforman al individuo y a su comunidad.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     PLAN DE ESTUDIOS
+════════════════════════════════ -->
+<section id="plan">
+  <div class="container">
+    <div class="row align-items-start g-5">
+      <div class="col-lg-4 reveal">
+        <div class="section-label">Currículo</div>
+        <h2 class="section-title">Plan de Estudios</h2>
+        <div class="section-line"></div>
+        <p style="font-size:0.88rem;color:var(--text-mid);line-height:1.7;margin-bottom:1.2rem;">
+          Nuestro plan de estudios se basa en los Estándares Curriculares y Competencias del Ministerio de Educación Nacional, adaptados a nuestro contexto con énfasis en valores, inglés y formación cristiana.
+        </p>
+        <p style="font-size:0.88rem;color:var(--text-mid);line-height:1.7;">
+          <strong style="color:var(--wine);">25 horas</strong> semanales de formación integral en Básica Primaria (grados 1° a 5°), con un currículo balanceado que atiende todas las dimensiones del ser humano.
+        </p>
+        <div class="mt-3">
+          <div style="background:var(--white);border-radius:8px;padding:1.2rem;border:1px solid var(--beige);">
+            <h6 style="color:var(--wine);font-size:0.85rem;margin-bottom:0.6rem;">Preescolar – 20 h/semana</h6>
+            <ul style="list-style:none;padding:0;margin:0;font-size:0.8rem;color:var(--text-mid);">
+              <li style="padding:3px 0;">📦 Dimensión Corporal — 4h</li>
+              <li style="padding:3px 0;">🧠 Dimensión Cognitiva — 5h</li>
+              <li style="padding:3px 0;">🗣️ Dimensión Comunicativa — 5h</li>
+              <li style="padding:3px 0;">🌟 Ética y Valores — 3h</li>
+              <li style="padding:3px 0;">🎨 Dimensión Estética — 3h</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 reveal">
+        <div class="plan-table table-responsive">
+          <table class="table mb-0">
+            <thead>
+              <tr>
+                <th>Asignatura</th>
+                <th class="text-center">1°</th>
+                <th class="text-center">2°</th>
+                <th class="text-center">3°</th>
+                <th class="text-center">4°</th>
+                <th class="text-center">5°</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="asig-name">📐 Matemáticas</td>
+                <td class="hours-cell">7</td><td class="hours-cell">7</td>
+                <td class="hours-cell">7</td><td class="hours-cell">7</td>
+                <td class="hours-cell">7</td>
+              </tr>
+              <tr>
+                <td class="asig-name">📖 Lengua Castellana</td>
+                <td class="hours-cell">8</td><td class="hours-cell">8</td>
+                <td class="hours-cell">8</td><td class="hours-cell">8</td>
+                <td class="hours-cell">8</td>
+              </tr>
+              <tr>
+                <td class="asig-name">🗺️ Ciencias Sociales</td>
+                <td class="hours-cell">1</td><td class="hours-cell">1</td>
+                <td class="hours-cell">1</td><td class="hours-cell">2</td>
+                <td class="hours-cell">2</td>
+              </tr>
+              <tr>
+                <td class="asig-name">🔬 Ciencias Naturales</td>
+                <td class="hours-cell">1</td><td class="hours-cell">1</td>
+                <td class="hours-cell">1</td><td class="hours-cell">2</td>
+                <td class="hours-cell">2</td>
+              </tr>
+              <tr>
+                <td class="asig-name">🌟 Ética y Valores</td>
+                <td class="hours-cell">1</td><td class="hours-cell">1</td>
+                <td class="hours-cell">1</td><td class="hours-cell">1</td>
+                <td class="hours-cell">1</td>
+              </tr>
+              <tr>
+                <td class="asig-name">💻 Tecnología</td>
+                <td class="hours-cell">1</td><td class="hours-cell">1</td>
+                <td class="hours-cell">1</td><td class="hours-cell">1</td>
+                <td class="hours-cell">1</td>
+              </tr>
+              <tr>
+                <td class="asig-name">⚽ Educación Física</td>
+                <td class="hours-cell">2</td><td class="hours-cell">2</td>
+                <td class="hours-cell">2</td><td class="hours-cell">2</td>
+                <td class="hours-cell">2</td>
+              </tr>
+              <tr>
+                <td class="asig-name">🎨 Educación Artística</td>
+                <td class="hours-cell">1</td><td class="hours-cell">1</td>
+                <td class="hours-cell">1</td><td class="hours-cell">1</td>
+                <td class="hours-cell">1</td>
+              </tr>
+              <tr>
+                <td class="asig-name">✝️ Formación Cristiana</td>
+                <td class="hours-cell">1</td><td class="hours-cell">1</td>
+                <td class="hours-cell">1</td><td class="hours-cell">1</td>
+                <td class="hours-cell">1</td>
+              </tr>
+              <tr>
+                <td class="asig-name">🌍 Inglés</td>
+                <td class="hours-cell">2</td><td class="hours-cell">2</td>
+                <td class="hours-cell">2</td><td class="hours-cell">2</td>
+                <td class="hours-cell">2</td>
+              </tr>
+              <tr class="total-row">
+                <td class="asig-name">TOTAL SEMANAL</td>
+                <td class="hours-cell">25</td><td class="hours-cell">25</td>
+                <td class="hours-cell">25</td><td class="hours-cell">25</td>
+                <td class="hours-cell">25</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:0.75rem;color:var(--text-mid);margin-top:0.6rem;">
+          * Horas semanales por grado. Plan sujeto a ajustes según políticas del Ministerio de Educación Nacional.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     PERFIL DEL ESTUDIANTE
+════════════════════════════════ -->
+<section id="perfil" style="background:var(--white);">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-label">Formación</div>
+      <h2 class="section-title">Perfil del Estudiante</h2>
+      <div class="section-line center"></div>
+      <p style="max-width:560px;margin:0 auto;font-size:0.88rem;color:var(--text-mid);line-height:1.7;">
+        La persona que busca formar el C.E.I. Ofrenda de Vida es un ser íntegro capaz de transformar su entorno con valores cristianos y competencias para la vida.
+      </p>
+    </div>
+    <ul class="perfil-list reveal">
+      <li>Capaz de desarrollar competencias, aptitudes y destrezas en los procesos de aprendizaje</li>
+      <li>Preparado académica, laboral, socio-afectivo, familiar y espiritualmente</li>
+      <li>Cooperante en su formación integral y la de los demás miembros</li>
+      <li>Participante en el amor al prójimo, la tolerancia y la solidaridad</li>
+      <li>Respetuoso de los derechos, opiniones y puntos de vista de los demás</li>
+      <li>Obediente y responsable en el cumplimiento de sus deberes</li>
+      <li>Con identidad, participativo y responsable de los procesos democráticos</li>
+      <li>Ejemplo digno de ser imitado y poseedor de autonomía moral</li>
+      <li>Con capacidad de liderazgo y amor por la ecología y el medio ambiente</li>
+      <li>Con excelentes habilidades comunicativas en español e inglés</li>
+      <li>Capaz de solucionar problemáticas aplicando principios cristianos</li>
+      <li>Servidor activo de la comunidad y ciudadano comprometido</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     VALORES / PRINCIPIOS
+════════════════════════════════ -->
+<section id="valores" style="background:var(--beige);">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-4 reveal">
+        <div class="section-label">Principios</div>
+        <h2 class="section-title">Valores que nos Definen</h2>
+        <div class="section-line"></div>
+        <p style="font-size:0.88rem;color:var(--text-mid);line-height:1.7;">
+          Nuestros valores institucionales son el fundamento de cada proceso educativo. Rigen la convivencia, la enseñanza y la formación del carácter de cada miembro de la comunidad.
+        </p>
+        <!-- Mini escudo -->
+        <div style="margin-top:1.5rem;text-align:center;">
+          <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" style="width:130px;opacity:0.7;">
+            <circle cx="80" cy="80" r="72" fill="var(--wine-soft)" stroke="var(--wine)" stroke-width="2"/>
+            <path d="M80 115 C67 103 52 95 52 81 C52 72 59 66 67 68 C70 69 74 72 80 78 C86 72 90 69 93 68 C101 66 108 72 108 81 C108 95 93 103 80 115Z" fill="var(--wine)"/>
+            <rect x="77" y="67" width="6" height="21" fill="white" rx="1.5"/>
+            <rect x="70" y="73" width="20" height="6" fill="white" rx="1.5"/>
+          </svg>
+        </div>
+      </div>
+      <div class="col-lg-8 reveal">
+        <div style="background:var(--white);border-radius:10px;padding:1.5rem 2rem;box-shadow:var(--shadow);">
+          <div class="valor-item">
+            <div class="valor-num">01</div>
+            <div class="valor-content">
+              <h5>Valoración del Ser Humano</h5>
+              <p>El respeto por el otro como fundamento de las relaciones pedagógicas. Reconocemos la dignidad del hombre como hijo de Dios, promoviendo su amor fraterno y servicio mutuo.</p>
+            </div>
+          </div>
+          <div class="valor-item">
+            <div class="valor-num">02</div>
+            <div class="valor-content">
+              <h5>Igualdad</h5>
+              <p>Aplicamos principios de igualdad ante todos los estudiantes, con atención personalizada a quienes presentan más dificultades, sin ningún tipo de discriminación.</p>
+            </div>
+          </div>
+          <div class="valor-item">
+            <div class="valor-num">03</div>
+            <div class="valor-content">
+              <h5>Respeto</h5>
+              <p>Consideración, atención y reconocimiento de los derechos y la dignidad de cada persona. Primera condición para la auténtica convivencia en paz.</p>
+            </div>
+          </div>
+          <div class="valor-item">
+            <div class="valor-num">04</div>
+            <div class="valor-content">
+              <h5>Convivencia Social</h5>
+              <p>Conducta justa y recta frente a la formación ciudadana. La vida en comunidad implica comunicación, perdón, celebración y compromiso colectivo.</p>
+            </div>
+          </div>
+          <div class="valor-item">
+            <div class="valor-num">05</div>
+            <div class="valor-content">
+              <h5>Perseverancia y Fortaleza</h5>
+              <p>Los obstáculos son para superarlos. Enseñamos a nuestros estudiantes que con fe y constancia se alcanzan las metas académicas, personales y espirituales.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     GOBIERNO ESCOLAR
+════════════════════════════════ -->
+<section id="gobierno">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-label">Organización Institucional</div>
+      <h2 class="section-title">Gobierno Escolar</h2>
+      <div class="section-line center"></div>
+      <p style="max-width:560px;margin:0 auto;font-size:0.88rem;color:var(--text-mid);line-height:1.7;">
+        Órganos de participación democrática de la comunidad educativa, conforme al Artículo 142 de la Ley General de Educación 115 de 1994.
+      </p>
+    </div>
+    <div class="row g-3 reveal">
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="gov-card">
+          <div class="gov-icon"><i class="fa-solid fa-user-tie"></i></div>
+          <h5>Rector(a)</h5>
+          <p>Representante legal y académico. Dirige, planea y supervisa la institución.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="gov-card">
+          <div class="gov-icon"><i class="fa-solid fa-users-gear"></i></div>
+          <h5>Consejo Directivo</h5>
+          <p>Máxima autoridad. Orienta la comunidad académica y toma decisiones institucionales.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="gov-card">
+          <div class="gov-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+          <h5>Consejo Académico</h5>
+          <p>Orienta la pedagogía, estudia el currículo y supervisa el plan de estudios.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="gov-card">
+          <div class="gov-icon"><i class="fa-solid fa-handshake"></i></div>
+          <h5>Consejo de Convivencia</h5>
+          <p>Promueve la sana convivencia y garantiza los derechos de la comunidad educativa.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="gov-card">
+          <div class="gov-icon"><i class="fa-solid fa-family"></i></div>
+          <h5>Consejo de Padres</h5>
+          <p>Participación continua de los padres en el proceso formativo de los estudiantes.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2">
+        <div class="gov-card">
+          <div class="gov-icon"><i class="fa-solid fa-star"></i></div>
+          <h5>Personero Estudiantil</h5>
+          <p>Promueve los derechos de los estudiantes y los mecanismos de participación democrática.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rectora destacada -->
+    <div class="mt-5 reveal">
+      <div style="background:var(--white);border-radius:10px;padding:1.8rem 2rem;border:1px solid var(--beige);max-width:500px;margin:0 auto;text-align:center;box-shadow:var(--shadow);">
+        <div style="width:70px;height:70px;background:var(--wine-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+          <i class="fa-solid fa-user-graduate" style="font-size:1.6rem;color:var(--wine);"></i>
+        </div>
+        <div style="font-size:0.72rem;color:var(--gold);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;">Rectora</div>
+        <h4 style="color:var(--wine);margin-bottom:0.2rem;font-size:1.2rem;">Lic. Yoanna Caro Osorio</h4>
+        <p style="font-size:0.8rem;color:var(--text-mid);">Directora y representante legal del Centro Educativo Integral Ofrenda de Vida</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     MATRÍCULA
+════════════════════════════════ -->
+<section id="matricula">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-label">Admisiones</div>
+      <h2 class="section-title">Proceso de Matrícula</h2>
+      <div class="section-line center"></div>
+      <p style="max-width:540px;margin:0 auto;font-size:0.88rem;color:rgba(255,255,255,0.75);line-height:1.7;">
+        La matrícula es el acto que formaliza la vinculación del educando al servicio educativo. Inscríbase hoy y haga parte de nuestra comunidad ofrendista.
+      </p>
+    </div>
+    <div class="row g-4 reveal">
+      <div class="col-md-6 col-lg-4">
+        <div class="info-box">
+          <h5><i class="fa-solid fa-list-check me-2"></i>Requisitos de Matrícula</h5>
+          <ul class="req-list">
+            <li>Haber aprobado el proceso de admisión</li>
+            <li>Registro civil de nacimiento / tarjeta de identidad</li>
+            <li>Fotocopia del carné de vacunación</li>
+            <li>4 fotos actualizadas 3×4</li>
+            <li>Fotocopia de cédula del padre / acudiente</li>
+            <li>Certificado médico vigente</li>
+            <li>Paz y Salvo de institución anterior</li>
+            <li>Certificaciones de notas del año anterior</li>
+            <li>Fotocopia recibo servicio público</li>
+            <li>Fotocopia del SISBÉN y carné de salud</li>
+            <li>Carpeta con gancho legajador</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="info-box">
+          <h5><i class="fa-solid fa-route me-2"></i>Proceso de Admisión</h5>
+          <div style="position:relative;padding-left:1.5rem;">
+            <div style="position:absolute;left:0;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.2);"></div>
+            <div style="position:relative;margin-bottom:1rem;">
+              <div style="position:absolute;left:-1.7rem;top:3px;width:8px;height:8px;background:var(--gold);border-radius:50%;"></div>
+              <div style="font-size:0.8rem;color:rgba(255,255,255,0.85);">
+                <strong style="color:var(--gold-light);display:block;margin-bottom:2px;">Paso 1</strong>
+                Solicitar cupo y presentar documentos de admisión
+              </div>
+            </div>
+            <div style="position:relative;margin-bottom:1rem;">
+              <div style="position:absolute;left:-1.7rem;top:3px;width:8px;height:8px;background:var(--gold);border-radius:50%;"></div>
+              <div style="font-size:0.8rem;color:rgba(255,255,255,0.85);">
+                <strong style="color:var(--gold-light);display:block;margin-bottom:2px;">Paso 2</strong>
+                Entrevista con la dirección académica
+              </div>
+            </div>
+            <div style="position:relative;margin-bottom:1rem;">
+              <div style="position:absolute;left:-1.7rem;top:3px;width:8px;height:8px;background:var(--gold);border-radius:50%;"></div>
+              <div style="font-size:0.8rem;color:rgba(255,255,255,0.85);">
+                <strong style="color:var(--gold-light);display:block;margin-bottom:2px;">Paso 3</strong>
+                Confirmación de cupo disponible
+              </div>
+            </div>
+            <div style="position:relative;margin-bottom:1rem;">
+              <div style="position:absolute;left:-1.7rem;top:3px;width:8px;height:8px;background:var(--gold);border-radius:50%;"></div>
+              <div style="font-size:0.8rem;color:rgba(255,255,255,0.85);">
+                <strong style="color:var(--gold-light);display:block;margin-bottom:2px;">Paso 4</strong>
+                Presentación y formalización de todos los requisitos
+              </div>
+            </div>
+            <div style="position:relative;">
+              <div style="position:absolute;left:-1.7rem;top:3px;width:8px;height:8px;background:var(--gold);border-radius:50%;"></div>
+              <div style="font-size:0.8rem;color:rgba(255,255,255,0.85);">
+                <strong style="color:var(--gold-light);display:block;margin-bottom:2px;">Paso 5</strong>
+                Firma del contrato de matrícula y aceptación del Manual de Convivencia
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 col-lg-4">
+        <div class="info-box">
+          <h5><i class="fa-solid fa-circle-info me-2"></i>Información General</h5>
+          <div class="info-item">
+            <i class="fa-solid fa-school"></i>
+            <div>
+              <strong>Niveles ofrecidos</strong>
+              Preescolar, Básica Primaria y Básica Secundaria
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fa-regular fa-clock"></i>
+            <div>
+              <strong>Jornada</strong>
+              Única – Calendario A
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fa-solid fa-globe"></i>
+            <div>
+              <strong>Modalidad</strong>
+              Académica con énfasis en Inglés y Formación Cristiana
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fa-solid fa-id-badge"></i>
+            <div>
+              <strong>Carácter</strong>
+              Institución Privada – NIT 900273083
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fa-solid fa-map-marker-alt"></i>
+            <div>
+              <strong>Dirección</strong>
+              Calle 10 N° 10-30, Barrio Centro, San Juan Nepomuceno, Bolívar
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fa-solid fa-phone"></i>
+            <div>
+              <strong>Teléfonos</strong>
+              320 502 9053 — 314 520 7835
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     HIMNO
+════════════════════════════════ -->
+<section style="background:var(--beige);padding:60px 0;">
+  <div class="container">
+    <div class="text-center mb-4 reveal">
+      <div class="section-label">Identidad</div>
+      <h2 class="section-title">Himno Ofrenda de Vida</h2>
+      <div class="section-line center"></div>
+    </div>
+    <div class="row justify-content-center reveal">
+      <div class="col-lg-8">
+        <div style="background:var(--white);border-radius:10px;padding:2.5rem;box-shadow:var(--shadow);border-left:4px solid var(--wine);font-family:'Playfair Display',serif;">
+          <div class="row g-4">
+            <div class="col-md-4" style="border-right:1px solid var(--beige);">
+              <p style="font-size:0.85rem;font-style:italic;color:var(--text-mid);line-height:1.8;">
+                A mi escuela rodeada de montañas,<br/>este himno le ha regalado Dios,<br/>Como el Santuario de los colorados,<br/>los arroyos Catalina y Salvador;<br/>Es mi escuela llena de esperanza<br/>que procura cada día ser mejor,<br/>Cultivando por doquiera el amor,<br/>un ejemplo que nos da nuestro Creador.
+              </p>
+            </div>
+            <div class="col-md-4" style="border-right:1px solid var(--beige);">
+              <div style="background:var(--wine-soft);border-radius:6px;padding:0.8rem 1rem;margin-bottom:1rem;text-align:center;">
+                <p style="font-size:0.8rem;font-weight:700;color:var(--wine);margin:0;letter-spacing:0.05em;">CORO</p>
+              </div>
+              <p style="font-size:0.85rem;font-style:italic;color:var(--wine);line-height:1.8;text-align:center;">
+                "Hoy pedimos Padre tu consejo<br/>para practicar nuestra labor.<br/>La excelencia, integridad, altruismo<br/>es el lema de nuestra institución."
+              </p>
+            </div>
+            <div class="col-md-4">
+              <p style="font-size:0.85rem;font-style:italic;color:var(--text-mid);line-height:1.8;">
+                Yo soy parte de este sueño hermoso,<br/>que pujante pelea la bendición,<br/>Alzando siempre los ojos al cielo<br/>para recibir orientación.<br/>A Ti cantamos muy gozosos<br/>los hijos de Ofrenda de Vida<br/>Para que donde que quiera que vayamos,<br/>tu misericordia eterna nos bendiga.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     CONTACTO
+════════════════════════════════ -->
+<section id="contacto">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-label">Contáctenos</div>
+      <h2 class="section-title">Estamos para Servirle</h2>
+      <div class="section-line center"></div>
+    </div>
+    <div class="contact-card reveal">
+      <div class="row g-0">
+        <div class="col-md-5">
+          <div class="contact-info-panel">
+            <h3>Información de Contacto</h3>
+
+            <div class="contact-row">
+              <i class="fa-solid fa-map-marker-alt"></i>
+              <div>
+                <strong>Dirección</strong>
+                Calle 10 N° 10-30, Barrio Centro<br/>San Juan Nepomuceno, Bolívar, Colombia
+              </div>
+            </div>
+
+            <div class="contact-row">
+              <i class="fa-solid fa-phone"></i>
+              <div>
+                <strong>Teléfonos</strong>
+                320 502 9053 / 314 520 7835
+              </div>
+            </div>
+
+            <div class="contact-row">
+              <i class="fa-solid fa-id-card"></i>
+              <div>
+                <strong>NIT</strong>
+                900273083
+              </div>
+            </div>
+
+            <div class="contact-row">
+              <i class="fa-solid fa-database"></i>
+              <div>
+                <strong>Código DANE</strong>
+                313657006490
+              </div>
+            </div>
+
+            <div class="contact-row">
+              <i class="fa-solid fa-certificate"></i>
+              <div>
+                <strong>Licencia de Funcionamiento</strong>
+                #3452 de 2022 – Secretaría de Educación y Cultura Departamental
+              </div>
+            </div>
+
+            <div class="contact-row">
+              <i class="fa-solid fa-layer-group"></i>
+              <div>
+                <strong>Núcleo Educativo</strong>
+                N° 9 – San Juan Nepomuceno
+              </div>
+            </div>
+
+            <!-- Mapa estático SVG minimalista -->
+            <div style="margin-top:1.5rem;background:rgba(255,255,255,0.08);border-radius:8px;padding:1rem;text-align:center;">
+              <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:260px;opacity:0.7;">
+                <rect x="0" y="0" width="200" height="100" rx="6" fill="rgba(255,255,255,0.05)"/>
+                <!-- calles -->
+                <line x1="0" y1="50" x2="200" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                <line x1="100" y1="0" x2="100" y2="100" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+                <line x1="0" y1="25" x2="200" y2="25" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+                <line x1="0" y1="75" x2="200" y2="75" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+                <line x1="50" y1="0" x2="50" y2="100" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+                <line x1="150" y1="0" x2="150" y2="100" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+                <!-- Marcador -->
+                <circle cx="100" cy="50" r="8" fill="var(--gold)" opacity="0.9"/>
+                <circle cx="100" cy="50" r="3" fill="white"/>
+                <text x="100" y="72" text-anchor="middle" font-size="7" fill="rgba(255,255,255,0.6)" font-family="Lato,sans-serif">Calle 10 N°10-30</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div class="contact-form-panel">
+            <h4 style="font-size:1.2rem;color:var(--wine);margin-bottom:1.5rem;">Envíenos un Mensaje</h4>
+            <form id="contactForm" novalidate>
+              <div class="row g-3">
+                <div class="col-sm-6">
+                  <label class="form-label">Nombre completo</label>
+                  <input type="text" class="form-control" placeholder="Su nombre" required />
+                </div>
+                <div class="col-sm-6">
+                  <label class="form-label">Teléfono</label>
+                  <input type="tel" class="form-control" placeholder="Ej: 320 000 0000" />
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Correo electrónico</label>
+                  <input type="email" class="form-control" placeholder="correo@ejemplo.com" required />
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Motivo de consulta</label>
+                  <select class="form-select">
+                    <option value="">Seleccione una opción…</option>
+                    <option>Información sobre matrícula</option>
+                    <option>Proceso de admisión</option>
+                    <option>Información académica</option>
+                    <option>Formación cristiana</option>
+                    <option>Otra consulta</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Mensaje</label>
+                  <textarea class="form-control" rows="4" placeholder="Escriba su consulta aquí…" required></textarea>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn-wine w-100" style="border:none;cursor:pointer;padding:13px;">
+                    <i class="fa-regular fa-paper-plane me-2"></i>Enviar Mensaje
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     FOOTER
+════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="footer-brand">C.E.I. Ofrenda de Vida</div>
+        <p class="footer-logo-desc">
+          Institución educativa privada en San Juan Nepomuceno, Bolívar. Formando estudiantes íntegros con excelencia académica y valores cristianos desde el preescolar hasta la básica secundaria.
+        </p>
+        <div class="social-links">
+          <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-4">
+        <div class="footer-title">Navegación</div>
+        <ul class="footer-links">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#fundamentos">Fundamentos</a></li>
+          <li><a href="#oferta">Oferta Educativa</a></li>
+          <li><a href="#plan">Plan de Estudios</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-md-4">
+        <div class="footer-title">Institución</div>
+        <ul class="footer-links">
+          <li><a href="#gobierno">Gobierno Escolar</a></li>
+          <li><a href="#matricula">Matrícula</a></li>
+          <li><a href="#valores">Valores</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-md-4">
+        <div class="footer-title">Contacto Directo</div>
+        <div style="font-size:0.82rem;line-height:2;">
+          <div><i class="fa-solid fa-map-marker-alt me-2" style="color:var(--gold);"></i>Calle 10 N° 10-30, Barrio Centro</div>
+          <div><i class="fa-solid fa-map-pin me-2" style="color:var(--gold);"></i>San Juan Nepomuceno, Bolívar</div>
+          <div><i class="fa-solid fa-phone me-2" style="color:var(--gold);"></i>320 502 9053 / 314 520 7835</div>
+          <div><i class="fa-solid fa-certificate me-2" style="color:var(--gold);"></i>Lic. #3452 de 2022</div>
+          <div><i class="fa-solid fa-hashtag me-2" style="color:var(--gold);"></i>NIT 900273083</div>
+        </div>
+      </div>
+    </div>
+    <hr class="footer-divider" />
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 footer-bottom">
+      <span>© 2025 Centro Educativo Integral Ofrenda de Vida. Todos los derechos reservados.</span>
+      <span style="font-family:'Playfair Display',serif;font-style:italic;opacity:0.5;font-size:0.8rem;">"Excelencia · Integridad · Altruismo"</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll Top -->
+<a id="scrollTop" href="#inicio" title="Ir arriba">
+  <i class="fa-solid fa-chevron-up"></i>
+</a>
+
+<!-- ════════════════════════════════
+     SCRIPTS
+════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // ── Scroll reveal ──
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // ── Scroll top button ──
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('show', window.scrollY > 400);
+  });
+
+  // ── Active nav link on scroll ──
+  const sections = document.querySelectorAll('section[id], div[id="inicio"]');
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) cur = s.id;
+    });
+    navLinks.forEach(l => {
+      l.classList.toggle('active', l.getAttribute('href') === '#' + cur);
+    });
+  });
+
+  // ── Contact form ──
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('button[type="submit"]');
+    btn.innerHTML = '<i class="fa-solid fa-circle-check me-2"></i>¡Mensaje enviado!';
+    btn.style.background = '#27ae60';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fa-regular fa-paper-plane me-2"></i>Enviar Mensaje';
+      btn.style.background = '';
+      btn.disabled = false;
+      this.reset();
+    }, 3500);
+  });
+
+  // ── Navbar collapse on link click (mobile) ──
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      const collapse = document.getElementById('navMain');
+      const bsCollapse = bootstrap.Collapse.getInstance(collapse);
+      if (bsCollapse) bsCollapse.hide();
+    });
+  });
+</script>
+</body>
+</html>
